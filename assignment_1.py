@@ -14,7 +14,7 @@
 import turtle
 
 student_number = 11969156
-student_name = 'Connor'
+student_name = 'Connor Lowe'
 #
 #  NB: All files submitted for this assessable task will be subjected
 #  to automated plagiarism analysis using a tool such as the Measure
