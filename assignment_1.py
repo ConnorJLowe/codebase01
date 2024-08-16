@@ -10,7 +10,6 @@
 #
 #  Put your student number here as an integer and your name as a
 #  character string:
-# test
 
 import turtle
 
@@ -156,7 +155,134 @@ def circle(radius, pen_width, colour, fill_colour):
 
 
 # creation of virus tile
-def virus_high(x_coord, y_coord, ori):
+def robot_high(x_coord, y_coord, ori):
+    penup()
+    goto(x_coord, y_coord)
+    color('black')
+    width(3)
+    turtle.fillcolor('firebrick1')
+    turtle.begin_fill()
+    pendown()
+    triangle_side = 110
+    # draw the triangle border
+    if ori == 0:
+        for i in range(3):
+            turtle.forward(110)
+            turtle.right(120)
+        turtle.end_fill()
+    elif ori == 1:
+        for i in range(3):
+            turtle.forward(110)
+            turtle.right(-120)
+        turtle.end_fill()
+    # center the design
+    centroid_x = x_coord + triangle_side / 2
+    centroid_y = y_coord - (triangle_side / 6) if ori == 0 else y_coord + (triangle_side / 2)
+    turtle.penup()
+    turtle.goto(centroid_x - 5, centroid_y - 10)
+    # creating the design
+    # background shape
+    turtle.pendown()
+    turtle.color('darkslategray')
+    width(2)
+    turtle.fillcolor('gray10')
+    turtle.begin_fill()
+    for i in range(3):
+        turtle.forward(9)
+        turtle.right(-60)
+        turtle.forward(19)
+        turtle.right(-60)
+    turtle.end_fill()
+    # decals
+    turtle.penup()
+    turtle.goto(centroid_x + 10, centroid_y + 11)
+    circle(1, 2, 'darkgrey', 'black')
+    turtle.goto(centroid_x - 2, centroid_y + 8)
+    circle(2, 2, 'darkgrey', 'black')
+    turtle.goto(centroid_x + 7, centroid_y - 2)
+    circle(1, 2, 'darkgrey', 'black')
+    turtle.goto(centroid_x - 7, centroid_y + 4)
+    circle(1, 2, 'darkgrey', 'black')
+    # eyes
+    turtle.goto(centroid_x, centroid_y + 7)
+    circle(5, 1, 'darkgrey', 'red')
+    turtle.goto(centroid_x - 3, centroid_y - 5)
+    circle(4, 2, 'darkgrey', 'red')
+    turtle.goto(centroid_x + 4, centroid_y - 3)
+    circle(3, 1, 'darkgrey', 'red')
+
+    # stem down to legs
+    turtle.color('black')
+    turtle.goto(centroid_x-1, centroid_y-13)
+    setheading(270)
+    width(5)
+    turtle.pendown()
+    turtle.forward(10)
+    leg_origin = turtle.pos()
+    # legs
+    width(3)
+
+    # left
+    setheading(180)
+    turtle.forward(15)
+    setheading(220)
+    turtle.forward(10)
+    setheading(300)
+    turtle.forward(10)
+    penup()
+    goto(leg_origin)
+
+    pendown()
+    setheading(190)
+    turtle.forward(10)
+    setheading(220)
+    turtle.forward(15)
+    setheading(300)
+    turtle.forward(10)
+    penup()
+    goto(leg_origin)
+
+    pendown()
+    setheading(220)
+    turtle.forward(15)
+    setheading(220)
+    turtle.forward(10)
+    setheading(300)
+    turtle.forward(10)
+    penup()
+    goto(leg_origin)
+
+    # right
+    pendown()
+    setheading(315)
+    turtle.forward(20)
+    setheading(240)
+    turtle.forward(14)
+    penup()
+    goto(leg_origin)
+
+    pendown()
+    setheading(335)
+    turtle.forward(20)
+    setheading(240)
+    turtle.forward(14)
+    penup()
+    goto(leg_origin)
+
+    pendown()
+    setheading(0)
+    turtle.forward(13)
+    setheading(320)
+    turtle.forward(10)
+    setheading(230)
+    turtle.forward(25)
+    penup()
+    goto(leg_origin)
+
+    setheading(0)
+
+
+def robot_low(x_coord, y_coord, ori):
     penup()
     goto(x_coord, y_coord)
     color('black')
@@ -184,8 +310,9 @@ def virus_high(x_coord, y_coord, ori):
     # creating the design
     # background shape
     turtle.pendown()
-    turtle.color('darkred')
-    turtle.fillcolor('brown4')
+    turtle.color('darkslategray')
+    width(2)
+    turtle.fillcolor('gray10')
     turtle.begin_fill()
     for i in range(3):
         turtle.forward(9)
@@ -193,85 +320,103 @@ def virus_high(x_coord, y_coord, ori):
         turtle.forward(19)
         turtle.right(-60)
     turtle.end_fill()
-    # birds eye stems
+    # decals
     turtle.penup()
-    turtle.goto(centroid_x - 3, centroid_y - 5)
-    circle(4, 2, 'goldenrod1', 'yellow')
     turtle.goto(centroid_x + 10, centroid_y + 11)
-    circle(1, 2, 'goldenrod1', 'yellow')
+    circle(1, 2, 'darkgrey', 'black')
     turtle.goto(centroid_x - 2, centroid_y + 8)
-    circle(2, 2, 'goldenrod1', 'yellow')
-    turtle.goto(centroid_x - 10, centroid_y + 2)
-    circle(1, 2, 'goldenrod1', 'yellow')
+    circle(2, 2, 'darkgrey', 'black')
     turtle.goto(centroid_x + 7, centroid_y - 2)
-    circle(1, 2, 'goldenrod1', 'yellow')
-    turtle.goto(centroid_x - 8, centroid_y + 6)
-    circle(1, 2, 'goldenrod1', 'yellow')
-    turtle.goto(centroid_x - 1, centroid_y + 2)
-    circle(1, 2, 'goldenrod1', 'yellow')
+    circle(1, 2, 'darkgrey', 'black')
+    turtle.goto(centroid_x - 7, centroid_y + 4)
+    circle(1, 2, 'darkgrey', 'black')
+    # eyes
+    turtle.goto(centroid_x, centroid_y + 7)
+    circle(5, 1, 'lightcyan4', 'firebrick4')
+    turtle.goto(centroid_x - 3, centroid_y - 5)
+    circle(4, 2, 'darkgrey', 'black')
     turtle.goto(centroid_x + 4, centroid_y - 3)
-    circle(1, 2, 'goldenrod1', 'yellow')
+    circle(3, 1, 'darkgrey', 'cadetblue')
+
     # stem down to legs
     turtle.color('black')
-    turtle.goto(centroid_x-1, centroid_y-13)
+    turtle.goto(centroid_x - 1, centroid_y - 13)
     setheading(270)
     width(5)
     turtle.pendown()
     turtle.forward(10)
     leg_origin = turtle.pos()
     # legs
-    # turtle.color('red')
-    setheading(190)
+    width(3)
+
+    # left
+    setheading(180)
     turtle.forward(15)
+    setheading(220)
+    turtle.forward(10)
+    setheading(300)
+    turtle.forward(10)
     penup()
     goto(leg_origin)
 
     pendown()
-#     turtle.color('yellow')
+    setheading(190)
+    turtle.forward(10)
     setheading(220)
     turtle.forward(15)
+    setheading(300)
+    turtle.forward(10)
     penup()
     goto(leg_origin)
 
     pendown()
-    # turtle.color('green')
-    setheading(315)
+    setheading(220)
     turtle.forward(15)
+    setheading(220)
+    turtle.forward(10)
+    setheading(300)
+    turtle.forward(10)
+    penup()
+    goto(leg_origin)
+
+    # right
+    pendown()
+    setheading(315)
+    turtle.forward(20)
+    setheading(240)
+    turtle.forward(14)
+    penup()
     goto(leg_origin)
 
     pendown()
-    # turtle.color('blue')
-    setheading(350)
-    turtle.forward(15)
+    setheading(335)
+    turtle.forward(20)
+    setheading(240)
+    turtle.forward(14)
+    penup()
+    goto(leg_origin)
+
+    pendown()
+    setheading(0)
+    turtle.forward(13)
+    setheading(320)
+    turtle.forward(10)
+    setheading(230)
+    turtle.forward(25)
+    penup()
     goto(leg_origin)
 
     setheading(0)
 
 
-def virus_low(x_coord, y_coord, ori):
-    penup()
-    goto(x_coord, y_coord)
-    color('black')
-    width(5)
-    turtle.fillcolor('grey')
-    turtle.begin_fill()
-    pendown()
-    if ori == 0:
-        for i in range(3):
-            turtle.forward(110)
-            turtle.right(120)
-            turtle.end_fill()
-    elif ori == 1:
-        for i in range(3):
-            turtle.forward(110)
-            turtle.right(-120)
-            turtle.end_fill()
+# robot_high(0, 0, 0)
+# robot_low(55, 95, 1)
 
+robot_high(400, 100, 0)
+robot_high(500, 0, 1)
 
-virus_high(0, 0, 0)
-virus_high(55, 95, 1)
-# virus_low(55, 95, 1)
-
+robot_low(400, -100, 0)
+robot_low(500, -200, 1)
 
 #--------------------------------------------------------------------#
 
@@ -290,7 +435,7 @@ virus_high(55, 95, 1)
 # ***** You can add arguments to this function call to modify
 # ***** features of the drawing canvas such as the background
 # ***** and line colours, etc
-create_drawing_canvas(canvas_title='Density of Enox-11 Virus', write_instructions=False)
+create_drawing_canvas(canvas_title='Density Of Evil Robot Drones Over Earth', write_instructions=False, line_colour='sienna4', background_colour='springgreen4')
 
 # Create the data set and pass it to the student's function
 #
