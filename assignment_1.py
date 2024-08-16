@@ -7,7 +7,7 @@
 #  which constitutes academic dishonesty as stated and explained
 #  in QUT's Manual of Policies and Procedures, Section C/5.3
 #  "Academic Integrity" and Section E/2.1 "Student Code of Conduct".
-#
+
 #  Put your student number here as an integer and your name as a
 #  character string:
 
