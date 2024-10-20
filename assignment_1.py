@@ -36,14 +36,14 @@ student_name = 'Connor Lowe'
 #
 #  Note that this assessable assignment is in multiple parts,
 #  simulating incremental release of instructions by a paying
-#  "client".  This single template file will be used for all parts
+#  "client".  This single template file will be used for all parts,
 #  and you will submit your final solution as this single Python 3
-#  file only, whether or not you complete all requirements for the
+#  file only, whether you complete all requirements for the
 #  assignment.
 #
 #  This file relies on other Python modules but all of your code
 #  must appear in this file only.  You may not change any of the code
-#  in the other modules and you should not submit the other modules
+#  in the other modules, and you should not submit the other modules
 #  with your solution.  The markers will use their own copies of the
 #  other modules to test your code, so your solution will not work
 #  if it relies on changes made to any other files.
@@ -134,13 +134,6 @@ tracer(False)
 speed('fastest')
 
 
-def visualise_data(rename_me_in_task_1b):
-    pendown()
-    # color('black')
-    # width(5)
-    # forward(110)
-
-
 # reusable circle definition
 def circle(radius, pen_width, colour, fill_colour):
     turtle.pendown()
@@ -153,270 +146,341 @@ def circle(radius, pen_width, colour, fill_colour):
     turtle.penup()
 
 
-
-# creation of virus tile
-def robot_high(x_coord, y_coord, ori):
-    penup()
-    goto(x_coord, y_coord)
-    color('black')
-    width(3)
-    turtle.fillcolor('firebrick1')
-    turtle.begin_fill()
-    pendown()
-    triangle_side = 110
-    # draw the triangle border
-    if ori == 0:
+def robot(x_coord, y_coord, ori, pop):
+    if pop == 'high':
+        tracer(False)
+        penup()
+        goto(x_coord, y_coord)
+        color('black')
+        width(3)
+        turtle.fillcolor('firebrick1')
+        turtle.begin_fill()
+        pendown()
+        triangle_side = 110
+        # draw the triangle border
+        if ori == 0:
+            for i in range(3):
+                turtle.forward(110)
+                turtle.right(120)
+            turtle.end_fill()
+        elif ori == 1:
+            for i in range(3):
+                turtle.forward(110)
+                turtle.right(-120)
+            turtle.end_fill()
+        # center the design
+        centroid_x = x_coord + triangle_side / 2
+        centroid_y = y_coord - (triangle_side / 6) if ori == 0 else y_coord + (triangle_side / 2)
+        turtle.penup()
+        turtle.goto(centroid_x - 5, centroid_y - 10)
+        # creating the design
+        # background shape
+        turtle.pendown()
+        turtle.color('darkslategray')
+        width(2)
+        turtle.fillcolor('gray10')
+        turtle.begin_fill()
         for i in range(3):
-            turtle.forward(110)
-            turtle.right(120)
+            turtle.forward(9)
+            turtle.right(-60)
+            turtle.forward(19)
+            turtle.right(-60)
         turtle.end_fill()
-    elif ori == 1:
+        # decals
+        turtle.penup()
+        turtle.goto(centroid_x + 10, centroid_y + 11)
+        circle(1, 2, 'darkgrey', 'black')
+        turtle.goto(centroid_x - 2, centroid_y + 8)
+        circle(2, 2, 'darkgrey', 'black')
+        turtle.goto(centroid_x + 7, centroid_y - 2)
+        circle(1, 2, 'darkgrey', 'black')
+        turtle.goto(centroid_x - 7, centroid_y + 4)
+        circle(1, 2, 'darkgrey', 'black')
+        # eyes
+        turtle.goto(centroid_x, centroid_y + 7)
+        circle(5, 1, 'darkgrey', 'red')
+        turtle.goto(centroid_x - 3, centroid_y - 5)
+        circle(4, 2, 'darkgrey', 'red')
+        turtle.goto(centroid_x + 4, centroid_y - 3)
+        circle(3, 1, 'darkgrey', 'red')
+
+        # stem down to legs
+        turtle.color('black')
+        turtle.goto(centroid_x-1, centroid_y-13)
+        setheading(270)
+        width(5)
+        turtle.pendown()
+        turtle.forward(10)
+        leg_origin = turtle.pos()
+        # legs
+        width(3)
+
+        # left
+        setheading(180)
+        turtle.forward(15)
+        setheading(220)
+        turtle.forward(10)
+        setheading(300)
+        turtle.forward(10)
+        penup()
+        goto(leg_origin)
+
+        pendown()
+        setheading(190)
+        turtle.forward(10)
+        setheading(220)
+        turtle.forward(15)
+        setheading(300)
+        turtle.forward(10)
+        penup()
+        goto(leg_origin)
+
+        pendown()
+        setheading(220)
+        turtle.forward(15)
+        setheading(220)
+        turtle.forward(10)
+        setheading(300)
+        turtle.forward(10)
+        penup()
+        goto(leg_origin)
+
+        # right
+        pendown()
+        setheading(315)
+        turtle.forward(20)
+        setheading(240)
+        turtle.forward(14)
+        penup()
+        goto(leg_origin)
+
+        pendown()
+        setheading(335)
+        turtle.forward(20)
+        setheading(240)
+        turtle.forward(14)
+        penup()
+        goto(leg_origin)
+
+        pendown()
+        setheading(0)
+        turtle.forward(13)
+        setheading(320)
+        turtle.forward(10)
+        setheading(230)
+        turtle.forward(25)
+        penup()
+        goto(leg_origin)
+
+        setheading(0)
+    elif pop == 'low':
+        tracer(False)
+        penup()
+        goto(x_coord, y_coord)
+        color('black')
+        width(3)
+        turtle.fillcolor('darkorange')
+        turtle.begin_fill()
+        pendown()
+        triangle_side = 110
+        # draw the triangle border
+        if ori == 0:
+            for i in range(3):
+                turtle.forward(110)
+                turtle.right(120)
+            turtle.end_fill()
+        elif ori == 1:
+            for i in range(3):
+                turtle.forward(110)
+                turtle.right(-120)
+            turtle.end_fill()
+        # center the design
+        centroid_x = x_coord + triangle_side / 2
+        centroid_y = y_coord - (triangle_side / 6) if ori == 0 else y_coord + (triangle_side / 2)
+        turtle.penup()
+        turtle.goto(centroid_x - 5, centroid_y - 10)
+        # creating the design
+        # background shape
+        turtle.pendown()
+        turtle.color('darkslategray')
+        width(2)
+        turtle.fillcolor('gray10')
+        turtle.begin_fill()
         for i in range(3):
-            turtle.forward(110)
-            turtle.right(-120)
+            turtle.forward(9)
+            turtle.right(-60)
+            turtle.forward(19)
+            turtle.right(-60)
         turtle.end_fill()
-    # center the design
-    centroid_x = x_coord + triangle_side / 2
-    centroid_y = y_coord - (triangle_side / 6) if ori == 0 else y_coord + (triangle_side / 2)
-    turtle.penup()
-    turtle.goto(centroid_x - 5, centroid_y - 10)
-    # creating the design
-    # background shape
-    turtle.pendown()
-    turtle.color('darkslategray')
-    width(2)
-    turtle.fillcolor('gray10')
-    turtle.begin_fill()
-    for i in range(3):
-        turtle.forward(9)
-        turtle.right(-60)
-        turtle.forward(19)
-        turtle.right(-60)
-    turtle.end_fill()
-    # decals
-    turtle.penup()
-    turtle.goto(centroid_x + 10, centroid_y + 11)
-    circle(1, 2, 'darkgrey', 'black')
-    turtle.goto(centroid_x - 2, centroid_y + 8)
-    circle(2, 2, 'darkgrey', 'black')
-    turtle.goto(centroid_x + 7, centroid_y - 2)
-    circle(1, 2, 'darkgrey', 'black')
-    turtle.goto(centroid_x - 7, centroid_y + 4)
-    circle(1, 2, 'darkgrey', 'black')
-    # eyes
-    turtle.goto(centroid_x, centroid_y + 7)
-    circle(5, 1, 'darkgrey', 'red')
-    turtle.goto(centroid_x - 3, centroid_y - 5)
-    circle(4, 2, 'darkgrey', 'red')
-    turtle.goto(centroid_x + 4, centroid_y - 3)
-    circle(3, 1, 'darkgrey', 'red')
+        # decals
+        turtle.penup()
+        turtle.goto(centroid_x + 10, centroid_y + 11)
+        circle(1, 2, 'darkgrey', 'black')
+        turtle.goto(centroid_x - 2, centroid_y + 8)
+        circle(2, 2, 'darkgrey', 'black')
+        turtle.goto(centroid_x + 7, centroid_y - 2)
+        circle(1, 2, 'darkgrey', 'black')
+        turtle.goto(centroid_x - 7, centroid_y + 4)
+        circle(1, 2, 'darkgrey', 'black')
+        # eyes
+        turtle.goto(centroid_x, centroid_y + 7)
+        circle(5, 1, 'lightcyan4', 'firebrick4')
+        turtle.goto(centroid_x - 3, centroid_y - 5)
+        circle(4, 2, 'darkgrey', 'black')
+        turtle.goto(centroid_x + 4, centroid_y - 3)
+        circle(3, 1, 'darkgrey', 'cadetblue')
 
-    # stem down to legs
-    turtle.color('black')
-    turtle.goto(centroid_x-1, centroid_y-13)
-    setheading(270)
-    width(5)
-    turtle.pendown()
-    turtle.forward(10)
-    leg_origin = turtle.pos()
-    # legs
-    width(3)
+        # stem down to legs
+        turtle.color('black')
+        turtle.goto(centroid_x - 1, centroid_y - 13)
+        setheading(270)
+        width(5)
+        turtle.pendown()
+        turtle.forward(10)
+        leg_origin = turtle.pos()
+        # legs
+        width(3)
 
-    # left
-    setheading(180)
-    turtle.forward(15)
-    setheading(220)
-    turtle.forward(10)
-    setheading(300)
-    turtle.forward(10)
-    penup()
-    goto(leg_origin)
+        # left
+        setheading(180)
+        turtle.forward(15)
+        setheading(220)
+        turtle.forward(10)
+        setheading(300)
+        turtle.forward(10)
+        penup()
+        goto(leg_origin)
 
-    pendown()
-    setheading(190)
-    turtle.forward(10)
-    setheading(220)
-    turtle.forward(15)
-    setheading(300)
-    turtle.forward(10)
-    penup()
-    goto(leg_origin)
+        pendown()
+        setheading(190)
+        turtle.forward(10)
+        setheading(220)
+        turtle.forward(15)
+        setheading(300)
+        turtle.forward(10)
+        penup()
+        goto(leg_origin)
 
-    pendown()
-    setheading(220)
-    turtle.forward(15)
-    setheading(220)
-    turtle.forward(10)
-    setheading(300)
-    turtle.forward(10)
-    penup()
-    goto(leg_origin)
+        pendown()
+        setheading(220)
+        turtle.forward(15)
+        setheading(220)
+        turtle.forward(10)
+        setheading(300)
+        turtle.forward(10)
+        penup()
+        goto(leg_origin)
 
-    # right
-    pendown()
-    setheading(315)
-    turtle.forward(20)
-    setheading(240)
-    turtle.forward(14)
-    penup()
-    goto(leg_origin)
+        # right
+        pendown()
+        setheading(315)
+        turtle.forward(20)
+        setheading(240)
+        turtle.forward(14)
+        penup()
+        goto(leg_origin)
 
-    pendown()
-    setheading(335)
-    turtle.forward(20)
-    setheading(240)
-    turtle.forward(14)
-    penup()
-    goto(leg_origin)
+        pendown()
+        setheading(335)
+        turtle.forward(20)
+        setheading(240)
+        turtle.forward(14)
+        penup()
+        goto(leg_origin)
 
-    pendown()
-    setheading(0)
-    turtle.forward(13)
-    setheading(320)
-    turtle.forward(10)
-    setheading(230)
-    turtle.forward(25)
-    penup()
-    goto(leg_origin)
+        pendown()
+        setheading(0)
+        turtle.forward(13)
+        setheading(320)
+        turtle.forward(10)
+        setheading(230)
+        turtle.forward(25)
+        penup()
+        goto(leg_origin)
 
-    setheading(0)
-
-
-def robot_low(x_coord, y_coord, ori):
-    penup()
-    goto(x_coord, y_coord)
-    color('black')
-    width(3)
-    turtle.fillcolor('darkorange')
-    turtle.begin_fill()
-    pendown()
-    triangle_side = 110
-    # draw the triangle border
-    if ori == 0:
-        for i in range(3):
-            turtle.forward(110)
-            turtle.right(120)
-        turtle.end_fill()
-    elif ori == 1:
-        for i in range(3):
-            turtle.forward(110)
-            turtle.right(-120)
-        turtle.end_fill()
-    # center the design
-    centroid_x = x_coord + triangle_side / 2
-    centroid_y = y_coord - (triangle_side / 6) if ori == 0 else y_coord + (triangle_side / 2)
-    turtle.penup()
-    turtle.goto(centroid_x - 5, centroid_y - 10)
-    # creating the design
-    # background shape
-    turtle.pendown()
-    turtle.color('darkslategray')
-    width(2)
-    turtle.fillcolor('gray10')
-    turtle.begin_fill()
-    for i in range(3):
-        turtle.forward(9)
-        turtle.right(-60)
-        turtle.forward(19)
-        turtle.right(-60)
-    turtle.end_fill()
-    # decals
-    turtle.penup()
-    turtle.goto(centroid_x + 10, centroid_y + 11)
-    circle(1, 2, 'darkgrey', 'black')
-    turtle.goto(centroid_x - 2, centroid_y + 8)
-    circle(2, 2, 'darkgrey', 'black')
-    turtle.goto(centroid_x + 7, centroid_y - 2)
-    circle(1, 2, 'darkgrey', 'black')
-    turtle.goto(centroid_x - 7, centroid_y + 4)
-    circle(1, 2, 'darkgrey', 'black')
-    # eyes
-    turtle.goto(centroid_x, centroid_y + 7)
-    circle(5, 1, 'lightcyan4', 'firebrick4')
-    turtle.goto(centroid_x - 3, centroid_y - 5)
-    circle(4, 2, 'darkgrey', 'black')
-    turtle.goto(centroid_x + 4, centroid_y - 3)
-    circle(3, 1, 'darkgrey', 'cadetblue')
-
-    # stem down to legs
-    turtle.color('black')
-    turtle.goto(centroid_x - 1, centroid_y - 13)
-    setheading(270)
-    width(5)
-    turtle.pendown()
-    turtle.forward(10)
-    leg_origin = turtle.pos()
-    # legs
-    width(3)
-
-    # left
-    setheading(180)
-    turtle.forward(15)
-    setheading(220)
-    turtle.forward(10)
-    setheading(300)
-    turtle.forward(10)
-    penup()
-    goto(leg_origin)
-
-    pendown()
-    setheading(190)
-    turtle.forward(10)
-    setheading(220)
-    turtle.forward(15)
-    setheading(300)
-    turtle.forward(10)
-    penup()
-    goto(leg_origin)
-
-    pendown()
-    setheading(220)
-    turtle.forward(15)
-    setheading(220)
-    turtle.forward(10)
-    setheading(300)
-    turtle.forward(10)
-    penup()
-    goto(leg_origin)
-
-    # right
-    pendown()
-    setheading(315)
-    turtle.forward(20)
-    setheading(240)
-    turtle.forward(14)
-    penup()
-    goto(leg_origin)
-
-    pendown()
-    setheading(335)
-    turtle.forward(20)
-    setheading(240)
-    turtle.forward(14)
-    penup()
-    goto(leg_origin)
-
-    pendown()
-    setheading(0)
-    turtle.forward(13)
-    setheading(320)
-    turtle.forward(10)
-    setheading(230)
-    turtle.forward(25)
-    penup()
-    goto(leg_origin)
-
-    setheading(0)
+        setheading(0)
+    elif pop == 'clear':
+        tracer(False)
+        penup()
+        goto(x_coord, y_coord)
+        # # draw the triangle border
+        # if ori == 0:
+        #     for i in range(3):
+        #         turtle.forward(110)
+        #         turtle.right(120)
+        #     turtle.end_fill()
+        # elif ori == 1:
+        #     for i in range(3):
+        #         turtle.forward(110)
+        #         turtle.right(-120)
+        #     turtle.end_fill()
+        # center the design
+        centroid_x = x_coord + triangle_side / 2
+        centroid_y = y_coord - (triangle_side / 6) if ori == 0 else y_coord + (triangle_side / 2)
+        turtle.penup()
+        turtle.goto(centroid_x - 5, centroid_y - 10)
 
 
-# robot_high(0, 0, 0)
-# robot_low(55, 95, 1)
+def display_density(raw_data):
+    cell_width = 110
+    cell_height = 95
+    x_coord = cell_width / 2 - 220
+    y_coord = -cell_height
+    ori = 0
+    pop = 'high'
 
-robot_high(400, 100, 0)
-robot_high(500, 0, 1)
+    # robot(x_coord, y_coord, 1, 'high')
+    # robot(x_coord, y_coord, 1, 'high')
 
-robot_low(400, -100, 0)
-robot_low(500, -200, 1)
+    # robot(x_coord, y_coord, 1, 'high')
+    moves = ['North', 'East', 'North']
+
+    for move in moves:
+        if move == 'North':
+            penup()
+            if ori == 0:
+                y_coord += cell_height * 2
+                robot(x_coord, y_coord, 0, pop)
+            else:
+                robot(x_coord, y_coord, 1, pop)
+
+        elif move == 'East':
+            penup()
+            if ori == 0:
+                x_coord += cell_width / 2
+                y_coord -= cell_height
+                robot(x_coord, y_coord, 1, pop)
+            else:
+                x_coord += cell_width / 2
+                y_coord += cell_height
+                robot(x_coord, y_coord, 0, pop)
+
+        elif move == 'South':
+            penup()
+            if ori == 0:
+                y_coord -= cell_height * 2
+                robot(x_coord, y_coord, 1, pop)
+            else:
+                robot(x_coord, y_coord, 0, pop)
+
+        elif move == 'West':
+            penup()
+            if ori == 0:
+                x_coord -= cell_width / 2
+                y_coord += cell_height
+                robot(x_coord, y_coord, 1, pop)
+            else:
+                x_coord -= cell_width / 2
+                y_coord -= cell_height
+                robot(x_coord, y_coord, 0, pop)
+
+
+# Key to display meanings of symbols
+robot(400, 100, 0, 'high')
+robot(500, 0, 1, 'high')
+
+robot(400, -100, 0, 'low')
+robot(500, -200, 1, 'low')
 
 #--------------------------------------------------------------------#
 
@@ -437,6 +501,11 @@ robot_low(500, -200, 1)
 # ***** and line colours, etc
 create_drawing_canvas(canvas_title='Density Of Evil Robot Drones Over Earth', write_instructions=False, line_colour='sienna4', background_colour='springgreen4')
 
+goto((grid_width / 2.4) * cell_width, -cell_width / 3)
+write('High Population: >500 robots', align='left', font='Arial')
+goto((grid_width / 2.4) * cell_width, -cell_width * 2.2)
+write('Low Population: 50-500 robots', align='left', font='Arial')
+
 # Create the data set and pass it to the student's function
 #
 # ***** While developing your Task 1B code you can call the
@@ -445,12 +514,12 @@ create_drawing_canvas(canvas_title='Density Of Evil Robot Drones Over Earth', wr
 # ***** work with "data_set()" as the function call,
 # ***** i.e., for any random data set that can be returned by
 # ***** the function when called with no seed
-visualise_data(data_set())  # <-- no argument for "data_set" when assessed
+display_density(raw_data(12345))  # <-- no argument for "data_set" when assessed
 
 # Exit gracefully
 #
 # ***** Do not change this function call
-release_drawing_canvas(student_name)
+release_drawing_canvas(student_name, text_colour='lightblue')
 
 #
 #--------------------------------------------------------------------#
